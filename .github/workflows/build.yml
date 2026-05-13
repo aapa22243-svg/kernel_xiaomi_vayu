@@ -74,7 +74,7 @@ jobs:
             CC=clang \
             LLVM=1 \
             LLVM_IAS=1 \
-            vendor/vayu-perf_defconfig
+            vendor/vayu_defconfig
 
           yes | make O=out \
             ARCH=arm64 \
