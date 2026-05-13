@@ -48,13 +48,20 @@ jobs:
         run: |
           export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH
 
-          make O=out ARCH=arm64 vayu_defconfig
+          make O=out ARCH=arm64 \
+          CC=clang \
+          LLVM=1 \
+          LLVM_IAS=1 \
+          vayu_defconfig
 
           make -j$(nproc --all) O=out \
           ARCH=arm64 \
+          SUBARCH=arm64 \
           CC=clang \
+          CROSS_COMPILE=aarch64-linux-gnu- \
+          CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
           LLVM=1 \
-          LLVM_IAS=1
+          LLVM_IAS=1        
 
       - name: Prepare AnyKernel
         run: |
