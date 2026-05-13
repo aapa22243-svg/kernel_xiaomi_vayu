@@ -1,0 +1,72 @@
+name: Build Sanciko Kernel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+          git curl wget zip unzip \
+          build-essential bc bison flex \
+          libssl-dev libelf-dev \
+          python3 cpio kmod \
+          clang lld llvm
+
+      - name: Clone Proton Clang
+        run: |
+          git clone --depth=1 \
+          https://github.com/kdrag0n/proton-clang.git \
+          clang
+
+      - name: Clone AnyKernel3
+        run: |
+          git clone --depth=1 \
+          https://github.com/osm0sis/AnyKernel3.git \
+          AnyKernel3
+
+      - name: Apply Branding
+        run: |
+          echo 'CONFIG_LOCALVERSION="-SancikoKernel"' >> arch/arm64/configs/vayu_defconfig
+
+      - name: Export Variables
+        run: |
+          echo "ARCH=arm64" >> $GITHUB_ENV
+          echo "SUBARCH=arm64" >> $GITHUB_ENV
+          echo "KBUILD_BUILD_USER=Sanciko" >> $GITHUB_ENV
+          echo "KBUILD_BUILD_HOST=GamingEdition" >> $GITHUB_ENV
+
+      - name: Build Kernel
+        run: |
+          export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH
+
+          make O=out ARCH=arm64 vayu_defconfig
+
+          make -j$(nproc --all) O=out \
+          ARCH=arm64 \
+          CC=clang \
+          LLVM=1 \
+          LLVM_IAS=1
+
+      - name: Prepare AnyKernel
+        run: |
+          cp out/arch/arm64/boot/Image AnyKernel3/
+
+      - name: Create ZIP
+        run: |
+          cd AnyKernel3
+          zip -r9 ../SancikoKernel-v1.0-vayu.zip *
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: SancikoKernel
+          path: SancikoKernel-v1.0-vayu.zip
