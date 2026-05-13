@@ -81,7 +81,7 @@ jobs:
             CC=clang \
             LLVM=1 \
             LLVM_IAS=1 \
-            oldconfig
+            olddefconfig
 
           make -j$(nproc --all) \
             O=out \
