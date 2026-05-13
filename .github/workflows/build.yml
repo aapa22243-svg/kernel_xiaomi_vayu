@@ -35,16 +35,34 @@ jobs:
 
       - name: Configure AnyKernel
         run: |
-          sed -i 's/kernel.string=.*/kernel.string=Sanciko Kernel v1.1/g' AnyKernel3/anykernel.sh
+          cat > AnyKernel3/anykernel.sh << 'EOF'
+          properties() { '
+          kernel.string=Sanciko Kernel v1.1
+          do.devicecheck=0
+          do.modules=0
+          do.systemless=1
+          do.cleanup=1
+          do.cleanuponabort=0
+          device.name1=vayu
+          device.name2=bhima
+          supported.versions=
+          supported.patchlevels=
+          '; }
 
-          sed -i 's/do.devicecheck=1/do.devicecheck=0/g' AnyKernel3/anykernel.sh
+          block=auto
 
-          sed -i 's/device.name1=.*/device.name1=vayu/g' AnyKernel3/anykernel.sh
+          is_slot_device=auto
+          ramdisk_compression=auto
 
-          sed -i 's/device.name2=.*/device.name2=bhima/g' AnyKernel3/anykernel.sh
+          . tools/ak3-core.sh
 
-          sed -i 's/block=\/dev\/block\/platform\/omap\/omap_hsmmc.0\/by-name\/boot;/block=auto;/g' AnyKernel3/anykernel.sh
+          dump_boot
 
+          write_boot
+
+          ## end install
+          EOF
+          
       - name: Apply Branding
         run: |
           echo 'CONFIG_LOCALVERSION="-SancikoKernel"' >> arch/arm64/configs/vayu_defconfig
