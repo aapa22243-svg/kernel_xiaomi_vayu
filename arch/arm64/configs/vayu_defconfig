@@ -6128,3 +6128,48 @@ CONFIG_THERMAL_GOV_STEP_WISE=y
 CONFIG_CPU_THERMAL=y
 CONFIG_QTI_BATTERY_CHARGER=y
 CONFIG_POWER_SUPPLY=y
+
+# =========================
+# Sanciko GPU Optimization
+# =========================
+
+CONFIG_QCOM_KGSL=y
+CONFIG_QCOM_KGSL_IDLE_TIMEOUT=80
+CONFIG_DEVFREQ_GOV_SIMPLE_ONDEMAND=y
+
+# =========================
+# Sanciko Touch Optimization
+# =========================
+
+CONFIG_INPUT_UINPUT=y
+CONFIG_INPUT_EVDEV=y
+
+# =========================
+# Sanciko CPU Gaming
+# =========================
+
+CONFIG_SCHED_MC=y
+CONFIG_SCHED_CLUSTER=y
+CONFIG_CPU_IDLE=y
+
+# =========================
+# Sanciko Network Gaming
+# =========================
+
+CONFIG_TCP_CONG_BBR=y
+CONFIG_DEFAULT_BBR=y
+
+# =========================
+# Sanciko Thermal
+# =========================
+
+CONFIG_THERMAL=y
+CONFIG_THERMAL_GOV_STEP_WISE=y
+CONFIG_CPU_THERMAL=y
+
+# =========================
+# Sanciko Charging
+# =========================
+
+CONFIG_QTI_BATTERY_CHARGER=y
+CONFIG_POWER_SUPPLY=y
