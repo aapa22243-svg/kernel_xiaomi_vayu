@@ -41,7 +41,8 @@ jobs:
 
       - name: Setup KernelSU Next
         run: |
-          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
+          curl -LSs \
+          "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
 
       - name: Enable KernelSU Configs
         run: |
@@ -66,28 +67,29 @@ jobs:
 
       - name: Build Kernel
         run: |
-          export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH 
-          make O=out \ 
-          ARCH=arm64 \ 
-          CC=clang \ 
-          LLVM=1 \ 
-          LLVM_IAS=1 \ 
-          vendor/vayu-perf_defconfig 
-          
-          yes "" | make O=out \ 
-          ARCH=arm64 \ 
-          CC=clang \ 
-          LLVM=1 \ 
-          LLVM_IAS=1 \ 
-          oldconfig 
-          
-          make -j$(nproc --all) \ 
-          O=out \ 
-          ARCH=arm64 \ 
-          SUBARCH=arm64 \ 
-          CC=clang \ 
-          LLVM=1 \ 
-          LLVM_IAS=1
+          export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH
+
+          make O=out \
+            ARCH=arm64 \
+            CC=clang \
+            LLVM=1 \
+            LLVM_IAS=1 \
+            vendor/vayu-perf_defconfig
+
+          yes | make O=out \
+            ARCH=arm64 \
+            CC=clang \
+            LLVM=1 \
+            LLVM_IAS=1 \
+            oldconfig
+
+          make -j$(nproc --all) \
+            O=out \
+            ARCH=arm64 \
+            SUBARCH=arm64 \
+            CC=clang \
+            LLVM=1 \
+            LLVM_IAS=1
 
       - name: Check Build Output
         run: |
