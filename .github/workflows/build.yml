@@ -66,21 +66,27 @@ jobs:
 
       - name: Build Kernel
         run: |
-          export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH
-
-          make O=out \
-          ARCH=arm64 \
-          CC=clang \
-          LLVM=1 \
-          LLVM_IAS=1 \
-          vendor/vayu-perf_defconfig
-
-          make -j$(nproc --all) \
-          O=out \
-          ARCH=arm64 \
-          SUBARCH=arm64 \
-          CC=clang \
-          LLVM=1 \
+          export PATH=$GITHUB_WORKSPACE/clang/bin:$PATH 
+          make O=out \ 
+          ARCH=arm64 \ 
+          CC=clang \ 
+          LLVM=1 \ 
+          LLVM_IAS=1 \ 
+          vendor/vayu-perf_defconfig 
+          
+          yes "" | make O=out \ 
+          ARCH=arm64 \ 
+          CC=clang \ 
+          LLVM=1 \ 
+          LLVM_IAS=1 \ 
+          oldconfig 
+          
+          make -j$(nproc --all) \ 
+          O=out \ 
+          ARCH=arm64 \ 
+          SUBARCH=arm64 \ 
+          CC=clang \ 
+          LLVM=1 \ 
           LLVM_IAS=1
 
       - name: Check Build Output
