@@ -43,6 +43,8 @@ jobs:
 
           sed -i 's/device.name2=.*/device.name2=bhima/g' AnyKernel3/anykernel.sh
 
+          sed -i 's/block=\/dev\/block\/platform\/omap\/omap_hsmmc.0\/by-name\/boot;/block=auto;/g' AnyKernel3/anykernel.sh
+
       - name: Apply Branding
         run: |
           echo 'CONFIG_LOCALVERSION="-SancikoKernel"' >> arch/arm64/configs/vayu_defconfig
