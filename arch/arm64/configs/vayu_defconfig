@@ -6104,13 +6104,12 @@ CONFIG_RMNET_PERF=m
 CONFIG_RMNET_SHS=m
 
 # =========================
-# Sanciko Gaming Optimization
+# Sanciko Stable Gaming
 # =========================
 
 CONFIG_HZ_300=y
 CONFIG_NO_HZ_IDLE=y
 CONFIG_HIGH_RES_TIMERS=y
-CONFIG_UCLAMP_TASK=y
 CONFIG_SCHED_AUTOGROUP=y
 CONFIG_SCHED_MC=y
 CONFIG_SCHED_CLUSTER=y
@@ -6120,56 +6119,12 @@ CONFIG_TCP_CONG_BBR=y
 CONFIG_DEFAULT_BBR=y
 CONFIG_ZRAM=y
 CONFIG_ZSMALLOC=y
-CONFIG_CGROUPS=y
-CONFIG_CGROUP_CPUACCT=y
-CONFIG_PREEMPT=y
 CONFIG_THERMAL=y
 CONFIG_THERMAL_GOV_STEP_WISE=y
 CONFIG_CPU_THERMAL=y
-CONFIG_QTI_BATTERY_CHARGER=y
-CONFIG_POWER_SUPPLY=y
-
-# =========================
-# Sanciko GPU Optimization
-# =========================
-
-CONFIG_QCOM_KGSL=y
-CONFIG_QCOM_KGSL_IDLE_TIMEOUT=80
 CONFIG_DEVFREQ_GOV_SIMPLE_ONDEMAND=y
-
-# =========================
-# Sanciko Touch Optimization
-# =========================
-
 CONFIG_INPUT_UINPUT=y
 CONFIG_INPUT_EVDEV=y
-
-# =========================
-# Sanciko CPU Gaming
-# =========================
-
-CONFIG_SCHED_MC=y
-CONFIG_SCHED_CLUSTER=y
 CONFIG_CPU_IDLE=y
-
-# =========================
-# Sanciko Network Gaming
-# =========================
-
-CONFIG_TCP_CONG_BBR=y
-CONFIG_DEFAULT_BBR=y
-
-# =========================
-# Sanciko Thermal
-# =========================
-
-CONFIG_THERMAL=y
-CONFIG_THERMAL_GOV_STEP_WISE=y
-CONFIG_CPU_THERMAL=y
-
-# =========================
-# Sanciko Charging
-# =========================
-
 CONFIG_QTI_BATTERY_CHARGER=y
 CONFIG_POWER_SUPPLY=y
